@@ -2,19 +2,6 @@
 
 package com.example.groundsGuide;
 
-/*
-import android.app.Activity;
-import android.os.Bundle;
-
-public class MainActivity extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-    }
-}
-*/
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -246,15 +233,15 @@ public class MainActivity extends FragmentActivity
     }
  
     /** A class to parse the Google Places in JSON format */
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>>
+    private class ParserTask extends AsyncTask<String, Integer, List<Direction>>
     {
  
         // Parsing the data in non-ui thread
         @Override
-        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData)
+        protected List<Direction> doInBackground(String... jsonData)
         {
             JSONObject jObject;
-            List<List<HashMap<String, String>>> routes = null;
+            List<Direction> route = null;
  
             try
             {
@@ -262,20 +249,21 @@ public class MainActivity extends FragmentActivity
                 DirectionsJSONParser parser = new DirectionsJSONParser();
  
                 // Starts parsing data
-                routes = parser.parse(jObject);
+                //routes = parser.parse(jObject);
+                route = parser.parseDirections(jObject);
             } catch (Exception e)
             {
                 e.printStackTrace();
             }
-            return routes;
+            return route;
         }
  
         // Executes in UI thread, after the parsing process
         @Override
-        protected void onPostExecute(List<List<HashMap<String, String>>> result)
+        protected void onPostExecute(List<Direction> result)
         {
-            ArrayList<LatLng> points = null;
-            PolylineOptions lineOptions = null;
+            ArrayList<LatLng> points = new ArrayList<LatLng>();
+            PolylineOptions lineOptions = new PolylineOptions();
             MarkerOptions markerOptions = new MarkerOptions();
             String distance = "";
             String duration = "";
@@ -286,40 +274,26 @@ public class MainActivity extends FragmentActivity
                 return;
             }
  
-            // Traversing through all the routes
-            for (int i = 0; i < result.size(); i++)
-            {
-                points = new ArrayList<LatLng>();
-                lineOptions = new PolylineOptions();
- 
-                // Fetching i-th route
-                List<HashMap<String, String>> path = result.get(i);
- 
-                // Fetching all the points in i-th route
-                for (int j = 0; j < path.size(); j++)
+                // Fetching all the points in route
+                for (int j = 0; j < result.size(); j++)
                 {
-                    HashMap<String, String> point = path.get(j);
- 
+                	Direction d = result.get(j);
                     if (j == 0)
-                    { // Get distance from the list
-                        distance = point.get("distance");
+                    { 
+                    	distance = d.distance;
+                    	duration = d.duration;
                         continue;
-                    } else if (j == 1)
-                    { // Get duration from the list
-                        duration = point.get("duration");
-                        continue;
+                    } 
+                    for(LatLng coordinate : d.coordinates){
+                    	points.add(coordinate);
                     }
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
-                    points.add(position);
                 }
  
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(2);
                 lineOptions.color(Color.RED);
-            }
+           // }
  
             MainActivity.this.tvDistanceDuration.setText("Distance:" + distance + ", Duration:" + duration);
  
@@ -328,15 +302,7 @@ public class MainActivity extends FragmentActivity
         }
     }
  
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        this.getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    */
+    
     
 }
 

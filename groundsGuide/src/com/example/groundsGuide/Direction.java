@@ -45,4 +45,9 @@ public class Direction {
 		this.seconds = d.seconds; 
 		
 	}
+	
+	public String toString(){
+		
+		return this.instructions + "length: " + this.distance + "time: " + this.duration; 
+	}
 }
