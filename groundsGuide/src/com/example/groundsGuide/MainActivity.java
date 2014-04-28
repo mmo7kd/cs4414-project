@@ -36,8 +36,6 @@ import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
  
@@ -55,7 +53,6 @@ public class MainActivity extends FragmentActivity
 {
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
-    ArrayList<LatLng> routePoints; 
     TextView tvDistanceDuration;
  
     @Override
@@ -76,16 +73,7 @@ public class MainActivity extends FragmentActivity
         this.map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         // Enable MyLocation Button in the Map
         this.map.setMyLocationEnabled(true);
-        
-       
-        
-        
  
-        
-        LatLngBounds cVille = new LatLngBounds(
-        		  new LatLng(38.015648, -78.537912), new LatLng(38.047637, -78.480526));
-
-        		this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(cVille.getCenter(), 15));
         // Setting onclick event listener for the map
         this.map.setOnMapClickListener(new OnMapClickListener()
         {
@@ -141,23 +129,6 @@ public class MainActivity extends FragmentActivity
         });
     }
  
-    public void setDirections(ArrayList<LatLng> points){
-    	ArrayList<String> pointNames = new ArrayList<String>();
-    	for(LatLng coordinate : points){
-    		String direction = coordinate.latitude + ", " + coordinate.longitude; 
-    		System.out.println("turn at " + direction ); 
-    		
-    	}
-    	
-    
-        //ListView directionsList =(ListView)findViewById(R.id.directions);
-    	 // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.directions_list, pointNames);
-          // Set The Adapter
-        // directionsList.setAdapter(arrayAdapter); 
-    	
-         //this.setContentView(findViewById(R.id.directionslist)); 
-    }
-    
     private String getDirectionsUrl(LatLng origin, LatLng dest)
     {
         // Origin of route
@@ -342,16 +313,13 @@ public class MainActivity extends FragmentActivity
                 lineOptions.width(2);
                 lineOptions.color(Color.RED);
             }
-            MainActivity.this.routePoints = points; 
-            MainActivity.this.setDirections(points); 
+ 
             MainActivity.this.tvDistanceDuration.setText("Distance:" + distance + ", Duration:" + duration);
  
             // Drawing polyline in the Google Map for the i-th route
             MainActivity.this.map.addPolyline(lineOptions);
         }
     }
-    
-   
  
     /*
     @Override
