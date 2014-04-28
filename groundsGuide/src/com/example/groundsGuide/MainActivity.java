@@ -74,6 +74,13 @@ public class MainActivity extends FragmentActivity
         // Enable MyLocation Button in the Map
         this.map.setMyLocationEnabled(true);
  
+        
+        //initialize location to c-ville
+        LatLngBounds cVille = new LatLngBounds( new LatLng(38.015648, -78.537912), new LatLng(38.047637, -78.480526));
+
+      	this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(cVille.getCenter(), 15));
+        
+        
         // Setting onclick event listener for the map
         this.map.setOnMapClickListener(new OnMapClickListener()
         {
