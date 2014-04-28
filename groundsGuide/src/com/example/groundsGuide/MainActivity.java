@@ -140,9 +140,14 @@ public class MainActivity extends FragmentActivity
         // Sensor enabled
         String sensor = "sensor=false";
  
+        // Walking mode
+        String mode = "mode=walking";
+        
         // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + sensor;
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
  
+        
+        
         // Output format
         String output = "json";
  
