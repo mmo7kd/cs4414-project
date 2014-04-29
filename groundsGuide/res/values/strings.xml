@@ -3,6 +3,10 @@
 
     <string name="app_name">groundsGuide</string>
 	<string name="action_settings">Settings</string>
-	<string name="hello_world">Tap two locations in the map</string>
+	<string name="map_directions">Tap two locations in the map</string>
 	<string name="str_tv_distance_time">Distance</string>
+	<string name="button_search">Search</string>
+	<string name="search_message">Search for a Location</string>
+	<string name="button_map">View Map</string>
+	<string name="map_message">View Map of UVA</string>
 </resources>

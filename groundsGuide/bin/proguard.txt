@@ -47,6 +47,9 @@
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
 # view AndroidManifest.xml #generated:33
+-keep class com.example.groundsGuide.HomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:40
 -keep class com.example.groundsGuide.MainActivity { <init>(...); }
 
 # view res/layout/activity_main.xml #generated:14
