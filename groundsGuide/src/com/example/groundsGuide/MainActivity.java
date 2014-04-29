@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
     TextView tvDistanceDuration;
+    DatabaseHandler dbHandler; 
  
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,6 +68,19 @@ public class MainActivity extends FragmentActivity
 
       	this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(cVille.getCenter(), 15));
         
+      	
+      	//make database
+        this.dbHandler = new DatabaseHandler(getApplicationContext());
+        try {
+			this.dbHandler.createDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        
+        //try to get a point
+        double[] latLonTest = new double[2];
+        latLonTest = dbHandler.getClosestLocation(38.036342, -78.503037);
         
         // Setting onclick event listener for the map
         this.map.setOnMapClickListener(new OnMapClickListener()
