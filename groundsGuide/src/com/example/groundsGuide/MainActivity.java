@@ -88,9 +88,9 @@ public class MainActivity extends FragmentActivity
 		} 
 
 		//try to get a point
-		double[] latLonTest = new double[2];
-		latLonTest = dbHandler.getClosestLocation(38.036342, -78.503037);
-
+		
+		//String test = dbHandler.getClosestLocationName(38.036342, -78.503037);
+		//System.out.println(test); 
 		// Setting onclick event listener for the map
 		this.map.setOnMapClickListener(new OnMapClickListener()
 		{
@@ -274,7 +274,7 @@ public class MainActivity extends FragmentActivity
 
 				// Starts parsing data
 				//routes = parser.parse(jObject);
-				route = parser.parseDirections(jObject);
+				route = parser.parseDirections(jObject, dbHandler);
 			} catch (Exception e)
 			{
 				e.printStackTrace();

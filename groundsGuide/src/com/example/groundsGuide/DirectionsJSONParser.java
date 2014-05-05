@@ -18,7 +18,7 @@ public class DirectionsJSONParser
 	/** Receives a JSONObject and returns a list of lists containing latitude and longitude */
 	
 	
-	public List<Direction> parseDirections(JSONObject jObject)
+	public List<Direction> parseDirections(JSONObject jObject, DatabaseHandler dbHandler)
 	{
 		//List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String, String>>>();
 		JSONArray jRoutes = null;
@@ -73,7 +73,11 @@ public class DirectionsJSONParser
 						final JSONObject dur = step.getJSONObject("duration");	 
 						direction.duration = dur.getString("text");
 						direction.seconds = dur.getInt("value"); 
-						
+					
+						direction.start = list.get(0); 
+						//get closest place to direction
+						direction.place = dbHandler.getLocationName(direction.start.latitude, direction.start.longitude);
+						direction.rewriteInstructions(); 
 						path.add(direction); 
 					}
 				}

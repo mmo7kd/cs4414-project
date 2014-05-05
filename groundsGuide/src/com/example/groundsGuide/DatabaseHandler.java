@@ -187,6 +187,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		
 	}
 	
+	public String getLocationName(double lat, double lon)
+	{
+		double min = .07;
+		double x = 0;
+		double y = 0;
+		String name = ""; 
+		String sql = "SELECT * FROM locations";
+		this.openDataBase();
+		if(myDataBase.isOpen())
+		{
+			Cursor c = myDataBase.rawQuery(sql, null);
+			c.moveToFirst();
+			while (!c.isLast())
+			{
+				x = c.getDouble(c.getColumnIndex("lat"));
+				y = c.getDouble(c.getColumnIndex("lon"));
+				String tempName = c.getString(c.getColumnIndex("name")); 
+				c.moveToNext();
+				double distKM = getDistanceFromLatLonInKm(x, y, lat, lon); 
+				if(distKM<min){
+					min = distKM;
+					name = tempName; 
+				}
+			}
+
+		}
+		return name;
+		
+		
+	}
+	
 	public double[] getLocationWithinKm(double lat, double lon, double km)
 	{
 		double[] dubArray = new double[2];

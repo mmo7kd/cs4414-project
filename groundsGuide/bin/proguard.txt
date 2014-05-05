@@ -46,13 +46,13 @@
 # view res/layout/abc_search_view.xml #generated:85
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:50
+# view AndroidManifest.xml #generated:52
 -keep class com.example.groundsGuide.DirectionActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:34
+# view AndroidManifest.xml #generated:38
 -keep class com.example.groundsGuide.HomeActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:41
+# view AndroidManifest.xml #generated:34
 -keep class com.example.groundsGuide.MainActivity { <init>(...); }
 
 # view res/layout/activity_main.xml #generated:14
