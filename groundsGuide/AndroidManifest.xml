@@ -46,6 +46,7 @@ android:protectionLevel="signature" />
 	<meta-data
     android:name="com.google.android.maps.v2.API_KEY"
     android:value="AIzaSyCgM1eyD8LioZVwa_5v18WoP0zRpDnbLmQ"/>
+	<activity android:name="DirectionActivity"></activity>
 	
     </application>
 

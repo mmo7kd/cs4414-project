@@ -9,4 +9,9 @@
 	<string name="search_message">Search for a Location</string>
 	<string name="button_map">View Map</string>
 	<string name="map_message">View Map of UVA</string>
+	<string name="map">Map</string>
+	<string name="directions">Directions</string>
+	<string name="directions_dialog">Do you want to get directions?</string>
+	<string name="Yes">Yes</string>
+	<string name="No">No</string>
 </resources>

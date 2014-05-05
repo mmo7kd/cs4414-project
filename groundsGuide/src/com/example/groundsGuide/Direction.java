@@ -48,6 +48,6 @@ public class Direction {
 	
 	public String toString(){
 		
-		return this.instructions + "length: " + this.distance + "time: " + this.duration; 
+		return this.instructions + "\n\r length: " + this.distance + "\n\r time: " + this.duration; 
 	}
 }
