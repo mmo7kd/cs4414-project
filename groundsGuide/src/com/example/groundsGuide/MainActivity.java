@@ -42,6 +42,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+
+
 public class MainActivity extends FragmentActivity
 {
 	GoogleMap map;
